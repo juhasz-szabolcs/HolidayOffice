@@ -4,9 +4,88 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayOffice.WPF"
+        xmlns:vm="clr-namespace:HolidayOffice.Core.ViewModels;assembly=HolidayOffice.Core"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="Holiday Office" Height="450" Width="800">
 
+    <Window.DataContext>
+        <vm:FoglalasViewModel />
+    </Window.DataContext>
+
+    <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <local:InverseBoolToVisibilityConverter x:Key="InverseBoolToVisibilityConverter" />
+    </Window.Resources>
+
+    <Grid>
+        <!-- Lista nézet -->
+        <Grid Visibility="{Binding SzerkesztesLatszik, Converter={StaticResource InverseBoolToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <TextBlock Grid.Row="0" Text="Holiday Office" FontSize="24" HorizontalAlignment="Center" Margin="10"/>
+
+            <DataGrid Grid.Row="1" ItemsSource="{Binding Foglalasok}" SelectedItem="{Binding KivalasztottFoglalas}" 
+                      AutoGenerateColumns="False" IsReadOnly="True" Margin="10" HeadersVisibility="Column">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Név" Binding="{Binding Nev}" Width="2*"/>
+                    <DataGridTextColumn Header="Összeg (Ft)" Binding="{Binding Osszeg}" Width="*"/>
+                    <DataGridTextColumn Header="Foglalások" Binding="{Binding FoglalasokSzama}" Width="*"/>
+                    <DataGridTemplateColumn Header="Műveletek" Width="Auto">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button Content="✎" Width="30" Margin="2" Command="{Binding DataContext.SzerkesztesCommand, 
+                                            RelativeSource={RelativeSource AncestorType=Window}}" 
+                                            CommandParameter="{Binding}"/>
+                                    <Button Content="🗑" Width="30" Margin="2" Command="{Binding DataContext.TorlesCommand, 
+                                            RelativeSource={RelativeSource AncestorType=Window}}" 
+                                            CommandParameter="{Binding}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Button Grid.Row="2" Content="Új foglalás hozzáadása" HorizontalAlignment="Center" 
+                    Margin="10" Padding="20,5" Command="{Binding UjFoglalasCommand}"/>
+        </Grid>
+
+        <!-- Szerkesztési/Új nézet -->
+        <Grid Visibility="{Binding SzerkesztesLatszik, Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="Új Foglalás" 
+                       FontSize="24" HorizontalAlignment="Center" Margin="10,20"/>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Név:" VerticalAlignment="Center" Margin="10"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding SzerkesztettFoglalas.Nev, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="10" Padding="5"/>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Összeg (Ft):" VerticalAlignment="Center" Margin="10"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding SzerkesztettFoglalas.Osszeg, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="10" Padding="5"/>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Foglalások száma:" VerticalAlignment="Center" Margin="10"/>
+            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding SzerkesztettFoglalas.FoglalasokSzama, UpdateSourceTrigger=PropertyChanged}" 
+                     Margin="10" Padding="5"/>
+
+            <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Content="Hozzáadás" 
+                    HorizontalAlignment="Center" Margin="10,20" Padding="20,5" Command="{Binding MentesCommand}"/>
+        </Grid>
     </Grid>
 </Window>
