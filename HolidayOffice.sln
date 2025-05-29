@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.11.35303.130
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidayOffice.Core", "HolidayOffice.Core\HolidayOffice.Core.csproj", "{9F547F83-7231-4F9D-BA67-AE5550643CE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HolidayOffice.WPF", "HolidayOffice.WPF\HolidayOffice.WPF.csproj", "{EC5040D9-F5C6-423F-833C-F8B658716D44}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F547F83-7231-4F9D-BA67-AE5550643CE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F547F83-7231-4F9D-BA67-AE5550643CE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F547F83-7231-4F9D-BA67-AE5550643CE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F547F83-7231-4F9D-BA67-AE5550643CE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC5040D9-F5C6-423F-833C-F8B658716D44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC5040D9-F5C6-423F-833C-F8B658716D44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC5040D9-F5C6-423F-833C-F8B658716D44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC5040D9-F5C6-423F-833C-F8B658716D44}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E26C543C-D616-4C96-AE3C-537BFE601C57}
+	EndGlobalSection
+EndGlobal
